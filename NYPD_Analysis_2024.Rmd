@@ -261,12 +261,6 @@ NYPD_data_cleaned$OCCUR_TIME_SECONDS <- as.numeric(substr(NYPD_data_cleaned$OCCU
                                         as.numeric(substr(NYPD_data_cleaned$OCCUR_TIME, 4, 5)) * 60 +
                                         as.numeric(substr(NYPD_data_cleaned$OCCUR_TIME, 7, 8))
 
-# Calculate the mode of the LOC_OF_OCCUR_DESC column
-calculate_mode <- function(x) {
-  ux <- unique(na.omit(x))
-  ux[which.max(tabulate(match(x, ux)))]
-}
-
 # Define a helper function to check for NA-like values
 is_na_like <- function(x) {
   is.na(x) | x %in% c("na", "NA", "(null)", "null", "")
@@ -491,6 +485,7 @@ kable(contingency_df, col.names = c("Precinct", "Non-Murder", "Murder"), caption
 The following code performs a chi-squared test to evaluate the relationship between precincts and whether an incident resulted in a murder.
 
 ```{r Chi-Squared Test, echo=TRUE, message= FALSE, warning=FALSE}
+# Create a chi-squared test for the contingency table 
 chisq_result <- chisq.test(contingency_table)
 chisq_summary <- data.frame(
   Statistic = chisq_result$statistic,
