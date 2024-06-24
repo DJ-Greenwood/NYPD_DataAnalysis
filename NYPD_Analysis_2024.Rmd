@@ -3,6 +3,8 @@ title: "NYPD Shooting Incident Analysis"
 author: "Denzil James Greenwood"
 date: "`r format(Sys.Date(), '%B %d %Y')`"
 output:
+  html_document:
+    df_print: paged
   pdf_document:
     includes:
       in_header: preamble.tex
